@@ -1,6 +1,6 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle.shapes;
 
-import com.findrealhope.util.Turtle;
+import com.findrealhope.turtle.Turtle;
 import org.junit.Test;
 
 public class BoxTest extends PlaneTest {

@@ -1,8 +1,7 @@
-package com.findrealhope.util;
+package com.findrealhope.turtle;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
 
 /**
  * Akin to "turtle graphics"

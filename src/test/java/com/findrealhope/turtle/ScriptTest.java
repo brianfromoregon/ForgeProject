@@ -1,4 +1,4 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -9,20 +9,20 @@ import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 
-public abstract class ShapeTest {
+public abstract class ScriptTest {
 
-    TestTurtle turtle = new TestTurtle();
+    public TestTurtle turtle = new TestTurtle();
 
     @Before
     public void setup() {
         turtle.reset(xyz(4, 0, 0), EnumFacing.NORTH);
     }
 
-    BlockPos xyz(int x, int y, int z) {
+    public BlockPos xyz(int x, int y, int z) {
         return new BlockPos(x, y, z);
     }
 
-    void verifyOnlyMarked(BlockPos... positions) {
+    public void verifyOnlyMarked(BlockPos... positions) {
         Set<BlockPos> marked = new HashSet<>();
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {

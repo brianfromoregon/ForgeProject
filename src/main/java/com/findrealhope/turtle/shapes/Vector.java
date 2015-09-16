@@ -1,52 +1,36 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle.shapes;
 
-import com.findrealhope.util.Turtle;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.findrealhope.turtle.Script;
+import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 
-import java.util.List;
+import static java.lang.Math.round;
 
-public class Line implements AngledShape, ShapeUtil {
-
-    @Override
-    public void draw(Vec3 direction, Turtle turtle, List<String> params) {
-
-    }
+public class Vector implements Script {
 
     @Override
-    public void draw(Turtle turtle, List<String> params) {
-        int depth = param(params, 0, 5);
-        draw(turtle, depth);
+    public void draw(Turtle turtle, Context context) {
+        int length = param(context, 0, 5);
+        draw(turtle, context.playerFacing(), length);
     }
-
-    public void draw(Turtle turtle, int depth) {
-        turtle.penDown().forward(depth);
-    }
-
-    @Override
-    public String parameters() {
-        return "depth";
-    }
-
 
     /**
      * Bresenham 3d line from: https://gist.github.com/yamamushi/5823518
      */
-    void drawLine(World world, Block type, BlockPos pos1, BlockPos pos2) {
-        IBlockState state = type.getBlockState().getBaseState();
+    public void draw(Turtle turtle, Vec3 look, int length) {
+        BlockPos begin = turtle.position();
+        BlockPos end = turtle.position().add(round(look.xCoord * length), round(look.yCoord * length), round(look.zCoord * length));
 
         int i, dx, dy, dz, l, m, n, x_inc, y_inc, z_inc, err_1, err_2, dx2, dy2, dz2;
         int[] point = new int[3];
 
-        point[0] = pos1.getX();
-        point[1] = pos1.getY();
-        point[2] = pos1.getZ();
-        dx = pos2.getX() - pos1.getX();
-        dy = pos2.getY() - pos1.getY();
-        dz = pos2.getZ() - pos1.getZ();
+        point[0] = begin.getX();
+        point[1] = begin.getY();
+        point[2] = begin.getZ();
+        dx = end.getX() - begin.getX();
+        dy = end.getY() - begin.getY();
+        dz = end.getZ() - begin.getZ();
         x_inc = (dx < 0) ? -1 : 1;
         l = Math.abs(dx);
         y_inc = (dy < 0) ? -1 : 1;
@@ -61,7 +45,7 @@ public class Line implements AngledShape, ShapeUtil {
             err_1 = dy2 - l;
             err_2 = dz2 - l;
             for (i = 0; i < l; i++) {
-                world.setBlockState(new BlockPos(point[0], point[1], point[2]), state);
+                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
                 if (err_1 > 0) {
                     point[1] += y_inc;
                     err_1 -= dx2;
@@ -78,7 +62,7 @@ public class Line implements AngledShape, ShapeUtil {
             err_1 = dx2 - m;
             err_2 = dz2 - m;
             for (i = 0; i < m; i++) {
-                world.setBlockState(new BlockPos(point[0], point[1], point[2]), state);
+                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
                 if (err_1 > 0) {
                     point[0] += x_inc;
                     err_1 -= dy2;
@@ -95,7 +79,7 @@ public class Line implements AngledShape, ShapeUtil {
             err_1 = dy2 - n;
             err_2 = dx2 - n;
             for (i = 0; i < n; i++) {
-                world.setBlockState(new BlockPos(point[0], point[1], point[2]), state);
+                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
                 if (err_1 > 0) {
                     point[1] += y_inc;
                     err_1 -= dz2;
@@ -109,6 +93,11 @@ public class Line implements AngledShape, ShapeUtil {
                 point[2] += z_inc;
             }
         }
-        world.setBlockState(new BlockPos(point[0], point[1], point[2]), state);
+        turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
+    }
+
+    @Override
+    public String parameters() {
+        return "length";
     }
 }

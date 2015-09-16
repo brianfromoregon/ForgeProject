@@ -1,4 +1,4 @@
-package com.findrealhope.util;
+package com.findrealhope.turtle;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
@@ -33,8 +33,10 @@ public class MinecraftTurtle implements Turtle {
     @Override
     public Turtle reset(BlockPos position, EnumFacing facing) {
         this.penDown = false;
-        this.pos = position;
-        this.facing = facing;
+        if (position != null)
+            this.pos = position;
+        if (facing != null)
+            this.facing = facing;
         return this;
     }
 

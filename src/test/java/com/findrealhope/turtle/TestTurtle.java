@@ -1,7 +1,5 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle;
 
-import com.findrealhope.util.MinecraftTurtle;
-import com.findrealhope.util.Turtle;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
@@ -9,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestTurtle extends MinecraftTurtle {
     public byte[][][] space = new byte[9][9][9];
-    boolean assertNoDups = true;
+    public boolean assertNoDups = true;
 
     @Override
     protected BlockPos shifted(EnumFacing direction) {

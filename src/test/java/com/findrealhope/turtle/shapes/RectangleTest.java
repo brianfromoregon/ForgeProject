@@ -1,8 +1,9 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle.shapes;
 
+import com.findrealhope.turtle.ScriptTest;
 import org.junit.Test;
 
-public class RectangleTest extends ShapeTest {
+public class RectangleTest extends ScriptTest {
     Rectangle shape = new Rectangle();
 
     @Test

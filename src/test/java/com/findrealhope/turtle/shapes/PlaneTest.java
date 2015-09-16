@@ -1,10 +1,9 @@
-package com.findrealhope.shapes;
+package com.findrealhope.turtle.shapes;
 
+import com.findrealhope.turtle.ScriptTest;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
-public class PlaneTest extends ShapeTest {
+public class PlaneTest extends ScriptTest {
     private Plane shape = new Plane();
 
     Plane plane() {
