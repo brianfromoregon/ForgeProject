@@ -12,16 +12,16 @@ public class Vector implements Script {
     @Override
     public void draw(Turtle turtle, Context context) {
         int length = param(context, 0, 5);
-        draw(turtle, context.playerFacing(), length);
+        BlockPos begin = turtle.position();
+        Vec3 look = context.playerFacing();
+        BlockPos end = turtle.position().add(round(look.xCoord * length), round(look.yCoord * length), round(look.zCoord * length));
+        draw(turtle, begin, end);
     }
 
     /**
      * Bresenham 3d line from: https://gist.github.com/yamamushi/5823518
      */
-    public void draw(Turtle turtle, Vec3 look, int length) {
-        BlockPos begin = turtle.position();
-        BlockPos end = turtle.position().add(round(look.xCoord * length), round(look.yCoord * length), round(look.zCoord * length));
-
+    public void draw(Turtle turtle, BlockPos begin, BlockPos end) {
         int i, dx, dy, dz, l, m, n, x_inc, y_inc, z_inc, err_1, err_2, dx2, dy2, dz2;
         int[] point = new int[3];
 

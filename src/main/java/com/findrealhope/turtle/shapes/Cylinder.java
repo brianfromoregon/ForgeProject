@@ -17,6 +17,9 @@ public class Cylinder implements Script {
     }
 
     public void draw(Turtle turtle, int radius, int depth) {
+        if (radius == 0 || depth == 0)
+            return;
+
         BlockPos start = turtle.position();
         disc.draw(turtle, radius);
         for (int i = 0; i < depth - 2; i++) {

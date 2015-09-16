@@ -6,15 +6,17 @@ import com.findrealhope.turtle.Turtle;
 import com.findrealhope.turtle.shapes.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class TurtleScriptMod {
     Map<String, Script> scripts;
 
     public TurtleScriptMod() {
-        this.scripts = new HashMap<>();
+        this.scripts = new LinkedHashMap<>();
         scripts.put("box", new Box());
         scripts.put("cube", new Cube());
         scripts.put("circle", new Circle());
@@ -33,6 +35,8 @@ public class TurtleScriptMod {
         scripts.put("plane", new Plane());
         scripts.put("rectangle", new Rectangle());
         scripts.put("sphere", new Sphere());
+        scripts.put("triangle", new Triangle());
+        scripts.put("prism", new Prism());
         scripts.put("vector", new Vector());
     }
 
@@ -46,6 +50,9 @@ public class TurtleScriptMod {
         if (words.get(0).equalsIgnoreCase("erase")) {
             erase = true;
             words = words.subList(1, words.size());
+        } else if (words.get(0).equals("?")) {
+            showUsage(player);
+            return;
         }
         if (words.isEmpty()) return;
 
@@ -84,5 +91,15 @@ public class TurtleScriptMod {
                 return player.getLookVec();
             }
         });
+    }
+
+    private void showUsage(EntityPlayer player) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Turtle scripts usage:\n")
+                .append("Start a script with 'erase' and the blocks will be erased. Like: erase cube 5\n");
+        for (Map.Entry<String, Script> script : scripts.entrySet()) {
+            sb.append("\n").append(script.getKey()).append(" ").append(script.getValue().parameters());
+        }
+        player.addChatMessage(new ChatComponentText(sb.toString()));
     }
 }
