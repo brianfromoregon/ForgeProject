@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 public class MinecraftTurtle implements Turtle {
     World world;
-    IBlockState blockType;
+    protected IBlockState blockType;
     BlockPos pos;
     EnumFacing facing;
     boolean penDown = false;
@@ -44,6 +44,14 @@ public class MinecraftTurtle implements Turtle {
     public Turtle forward(int blocks) {
         for (int i = 0; i < blocks; i++) {
             pos = mark(shifted(facing));
+        }
+        return this;
+    }
+
+    @Override
+    public Turtle back(int blocks) {
+        for (int i = 0; i < blocks; i++) {
+            pos = mark(shifted(facing.getOpposite()));
         }
         return this;
     }

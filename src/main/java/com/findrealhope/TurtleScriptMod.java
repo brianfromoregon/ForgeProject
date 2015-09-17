@@ -1,11 +1,15 @@
 package com.findrealhope;
 
 import com.findrealhope.turtle.MinecraftTurtle;
+import com.findrealhope.turtle.QueueDrainer;
 import com.findrealhope.turtle.Script;
 import com.findrealhope.turtle.Turtle;
+import com.findrealhope.turtle.plot.XYPlot;
+import com.findrealhope.turtle.plot.XYZPlot;
 import com.findrealhope.turtle.shapes.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -13,19 +17,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class TurtleScriptMod {
 
-    Map<String, Script> scripts;
+    static final boolean useQueueingTurtle = true;
+
+    final Map<String, Script> scripts = new LinkedHashMap<>();
+    final QueueDrainer queueDrainer = new QueueDrainer(Minecraft.getMinecraft());
+    final Executor scriptRunner = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r);
+        t.setName("TurtleScriptMod.ScriptRunner");
+        t.setDaemon(true);
+        return t;
+    });
 
     public TurtleScriptMod() {
-        this.scripts = new LinkedHashMap<>();
         scripts.put("box", new Box());
         scripts.put("cube", new Cube());
         scripts.put("circle", new Circle());
@@ -38,6 +53,11 @@ public class TurtleScriptMod {
         scripts.put("triangle", new Triangle());
         scripts.put("prism", new Prism());
         scripts.put("vector", new Vector());
+        scripts.put("xyplot", new XYPlot());
+        scripts.put("xyzplot", new XYZPlot());
+
+        if (useQueueingTurtle)
+            FMLCommonHandler.instance().bus().register(queueDrainer);
     }
 
     @SubscribeEvent
@@ -76,11 +96,17 @@ public class TurtleScriptMod {
 
         List<String> args = words.subList(1, words.size());
 
-        Turtle turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
+        Turtle turtle;
+        if (useQueueingTurtle) {
+            turtle = queueDrainer.newTurtle(player.worldObj, type.getBlockState().getBaseState());
+        } else {
+            turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
+        }
+
         turtle.reset(player.getPosition(), player.getHorizontalFacing());
         turtle.forward(1);
 
-        script.draw(turtle, new Script.Context() {
+        Script.Context context = new Script.Context() {
             @Override
             public List<String> arguments() {
                 return args;
@@ -90,7 +116,15 @@ public class TurtleScriptMod {
             public Vec3 playerFacing() {
                 return player.getLookVec();
             }
-        });
+        };
+
+        if (useQueueingTurtle) {
+            scriptRunner.execute(() -> {
+                script.draw(turtle, context);
+            });
+        } else {
+            script.draw(turtle, context);
+        }
     }
 
     private void showUsage(EntityPlayer player) {

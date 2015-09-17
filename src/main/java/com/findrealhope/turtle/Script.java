@@ -23,8 +23,7 @@ public interface Script {
     }
 
     /**
-     *
-     * @param turtle This turtle will be positioned and facing at the desired starting place.
+     * @param turtle  This turtle will be positioned and facing at the desired starting place.
      * @param context Additional inputs to this script
      */
     void draw(Turtle turtle, Context context);
@@ -35,11 +34,18 @@ public interface Script {
     String parameters();
 
     default int param(Context context, int idx, int def) {
-        if (context.arguments().size() >= idx) {
+        if (context.arguments().size() > idx) {
             try {
                 return Integer.parseInt(context.arguments().get(idx));
             } catch (Exception e) {
             }
+        }
+        return def;
+    }
+
+    default String param(Context context, int idx, String def) {
+        if (context.arguments().size() > idx) {
+            return context.arguments().get(idx);
         }
         return def;
     }

@@ -12,7 +12,10 @@ public class Line implements Script {
     }
 
     public void draw(Turtle turtle, int depth) {
-        turtle.penDown().forward(depth);
+        if (depth == 0)
+            return;
+
+        turtle.penDown().forward(depth - 1);
     }
 
     @Override

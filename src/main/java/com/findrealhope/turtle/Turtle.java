@@ -15,6 +15,7 @@ public interface Turtle {
 
     // Motion
     Turtle forward(int blocks);
+    Turtle back(int blocks);
     Turtle up(int blocks);
     Turtle down(int blocks);
 
