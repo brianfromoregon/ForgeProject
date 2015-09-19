@@ -1,15 +1,11 @@
 package com.findrealhope;
 
-import com.findrealhope.turtle.MinecraftTurtle;
-import com.findrealhope.turtle.QueueDrainer;
-import com.findrealhope.turtle.Script;
-import com.findrealhope.turtle.Turtle;
+import com.findrealhope.turtle.*;
 import com.findrealhope.turtle.plot.XYPlot;
 import com.findrealhope.turtle.plot.XYZPlot;
 import com.findrealhope.turtle.shapes.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -32,13 +28,13 @@ public class TurtleScriptMod {
     static final boolean useQueueingTurtle = true;
 
     final Map<String, Script> scripts = new LinkedHashMap<>();
-    final QueueDrainer queueDrainer = new QueueDrainer(Minecraft.getMinecraft());
     final Executor scriptRunner = Executors.newSingleThreadExecutor(r -> {
         Thread t = new Thread(r);
         t.setName("TurtleScriptMod.ScriptRunner");
         t.setDaemon(true);
         return t;
     });
+    QueueingTurtleProvider turtleProvider;
 
     public TurtleScriptMod() {
         scripts.put("box", new Box());
@@ -55,9 +51,6 @@ public class TurtleScriptMod {
         scripts.put("vector", new Vector());
         scripts.put("xyplot", new XYPlot());
         scripts.put("xyzplot", new XYZPlot());
-
-        if (useQueueingTurtle)
-            FMLCommonHandler.instance().bus().register(queueDrainer);
     }
 
     @SubscribeEvent
@@ -98,7 +91,11 @@ public class TurtleScriptMod {
 
         Turtle turtle;
         if (useQueueingTurtle) {
-            turtle = queueDrainer.newTurtle(player.worldObj, type.getBlockState().getBaseState());
+            if (turtleProvider == null) {
+                turtleProvider = new QueueingTurtleProvider(player.worldObj);
+                FMLCommonHandler.instance().bus().register(turtleProvider);
+            }
+            turtle = turtleProvider.newTurtle(player.worldObj, type.getBlockState().getBaseState());
         } else {
             turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
         }

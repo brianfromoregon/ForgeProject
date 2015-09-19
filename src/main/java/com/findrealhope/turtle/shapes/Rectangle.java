@@ -16,11 +16,11 @@ public class Rectangle implements Script {
         if (width <= 0 || depth <= 0)
             return;
 
-        turtle.left().forward(width / 2).penDown() // start in SW corner
-                .right().forward(depth - 1) // left side
-                .right().forward(width - 1) // back side
-                .right().forward(depth - 1) // right side
-                .right().forward(width - 2); // front side
+        turtle.turnLeft().forward(width / 2).penDown() // start in SW corner
+                .turnRight().forward(depth - 1) // left side
+                .turnRight().forward(width - 1) // back side
+                .turnRight().forward(depth - 1) // right side
+                .turnRight().forward(width - 2); // front side
     }
 
     @Override

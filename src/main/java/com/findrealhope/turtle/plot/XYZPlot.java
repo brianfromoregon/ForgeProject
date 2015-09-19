@@ -34,7 +34,7 @@ public class XYZPlot implements Script {
                     if (o instanceof Number) {
                         double d = ((Number) o).doubleValue();
                         int z = (int) Math.round(d);
-                        turtle.reset(sPos, sFacing).forward(x - x1).up(z).right().forward(y - y1).penDown();
+                        turtle.reset(sPos, sFacing).forward(x - x1).up(z).turnRight().forward(y - y1).penDown();
                     }
                 }
             }

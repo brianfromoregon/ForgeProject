@@ -73,13 +73,13 @@ public class MinecraftTurtle implements Turtle {
     }
 
     @Override
-    public Turtle left() {
+    public Turtle turnLeft() {
         facing = facing.rotateYCCW();
         return this;
     }
 
     @Override
-    public Turtle right() {
+    public Turtle turnRight() {
         facing = facing.rotateY();
         return this;
     }

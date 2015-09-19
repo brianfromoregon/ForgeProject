@@ -30,8 +30,8 @@ public class Triangle implements Script {
             return;
 
         BlockPos top = turtle.up(height - 1).position();
-        BlockPos left = turtle.down(height - 1).left().forward(width / 2).position();
-        BlockPos right = turtle.left().left().forward(width - 1).position();
+        BlockPos left = turtle.down(height - 1).turnLeft().forward(width / 2).position();
+        BlockPos right = turtle.turnLeft().turnLeft().forward(width - 1).position();
 
         vector.draw(turtle, left, top);
         vector.draw(turtle, left, right);

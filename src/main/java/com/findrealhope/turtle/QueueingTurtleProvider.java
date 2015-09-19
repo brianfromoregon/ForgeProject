@@ -1,7 +1,6 @@
 package com.findrealhope.turtle;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -9,13 +8,19 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class QueueDrainer {
+/**
+ * Provides turtles which queue their drawing instructions in memory, to be applied async across ServerTickEvents.
+ * Two advantages for long running turtle scripts:
+ * 1. You get to see incremental progress
+ * 1. Server thread is not "hung" while the script executes
+ */
+public class QueueingTurtleProvider {
 
     private final LinkedBlockingQueue<PosAndType> toMark = new LinkedBlockingQueue<>(1000);
-    private final Minecraft minecraft;
+    private final World world;
 
-    public QueueDrainer(Minecraft minecraft) {
-        this.minecraft = minecraft;
+    public QueueingTurtleProvider(World world) {
+        this.world = world;
     }
 
     @SubscribeEvent
@@ -23,13 +28,13 @@ public class QueueDrainer {
         if (toMark.isEmpty())
             return;
 
-        long stopTime = minecraft.getSystemTime() + 15;
-        while (minecraft.getSystemTime() < stopTime) {
+        long stopTime = System.currentTimeMillis() + 15;
+        while (System.currentTimeMillis() < stopTime) {
             PosAndType next = toMark.poll();
             if (next == null)
                 return;
 
-            minecraft.theWorld.setBlockState(next.pos, next.type);
+            world.setBlockState(next.pos, next.type);
         }
     }
 

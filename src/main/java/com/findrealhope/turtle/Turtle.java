@@ -20,8 +20,8 @@ public interface Turtle {
     Turtle down(int blocks);
 
     // Facing
-    Turtle left();
-    Turtle right();
+    Turtle turnLeft();
+    Turtle turnRight();
 
     // Pen
     Turtle penDown();
