@@ -3,6 +3,7 @@ package com.findrealhope.turtle.shapes;
 import com.findrealhope.turtle.Script;
 import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
 public class Circle implements Script {
 
@@ -17,19 +18,20 @@ public class Circle implements Script {
      */
     public void draw(Turtle turtle, int radius) {
         BlockPos center = turtle.position().up(radius);
+        EnumFacing facing = turtle.facing();
         int d = (5 - radius * 4) / 4;
         int x = 0;
         int y = radius;
 
         do {
-            turtle.reset(center.add(x, y, 0), null).penDown();
-            turtle.reset(center.add(x, -y, 0), null).penDown();
-            turtle.reset(center.add(-x, y, 0), null).penDown();
-            turtle.reset(center.add(-x, -y, 0), null).penDown();
-            turtle.reset(center.add(y, x, 0), null).penDown();
-            turtle.reset(center.add(y, -x, 0), null).penDown();
-            turtle.reset(center.add(-y, x, 0), null).penDown();
-            turtle.reset(center.add(-y, -x, 0), null).penDown();
+            turtle.reset(center, facing).turnRight().forward(x).up(y).penDown();
+            turtle.reset(center, facing).turnRight().forward(x).down(y).penDown();
+            turtle.reset(center, facing).turnLeft().forward(x).up(y).penDown();
+            turtle.reset(center, facing).turnLeft().forward(x).down(y).penDown();
+            turtle.reset(center, facing).turnRight().forward(y).up(x).penDown();
+            turtle.reset(center, facing).turnRight().forward(y).down(x).penDown();
+            turtle.reset(center, facing).turnLeft().forward(y).up(x).penDown();
+            turtle.reset(center, facing).turnLeft().forward(y).down(x).penDown();
             if (d < 0) {
                 d += 2 * x + 1;
             } else {

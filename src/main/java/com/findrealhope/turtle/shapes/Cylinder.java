@@ -3,6 +3,7 @@ package com.findrealhope.turtle.shapes;
 import com.findrealhope.turtle.Script;
 import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
 public class Cylinder implements Script {
 
@@ -20,13 +21,14 @@ public class Cylinder implements Script {
         if (radius == 0 || depth == 0)
             return;
 
-        BlockPos start = turtle.position();
+        BlockPos sPos = turtle.position();
+        EnumFacing facing = turtle.facing();
         disc.draw(turtle, radius);
         for (int i = 0; i < depth - 2; i++) {
-            turtle.reset(start, null).forward(i + 1);
+            turtle.reset(sPos, facing).forward(i + 1);
             circle.draw(turtle, radius);
         }
-        turtle.reset(start, null).forward(depth - 1);
+        turtle.reset(sPos, facing).forward(depth - 1);
         disc.draw(turtle, radius);
     }
 
