@@ -1,6 +1,6 @@
-package com.findrealhope.turtle.shapes;
+package com.findrealhope.brian.turtlescript.shapes;
 
-import com.findrealhope.turtle.Script;
+import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.BlockPos;
 

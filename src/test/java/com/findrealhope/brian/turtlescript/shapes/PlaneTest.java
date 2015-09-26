@@ -1,6 +1,6 @@
-package com.findrealhope.turtle.shapes;
+package com.findrealhope.brian.turtlescript.shapes;
 
-import com.findrealhope.turtle.ScriptTest;
+import com.findrealhope.brian.turtlescript.ScriptTest;
 import org.junit.Test;
 
 public class PlaneTest extends ScriptTest {

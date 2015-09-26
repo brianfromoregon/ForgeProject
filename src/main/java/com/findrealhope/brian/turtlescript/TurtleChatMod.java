@@ -1,19 +1,15 @@
-package com.findrealhope;
+package com.findrealhope.brian.turtlescript;
 
 import com.findrealhope.turtle.*;
-import com.findrealhope.turtle.plot.XYPlot;
-import com.findrealhope.turtle.plot.XYZPlot;
-import com.findrealhope.turtle.shapes.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
+import com.findrealhope.brian.turtlescript.plot.XYPlot;
+import com.findrealhope.brian.turtlescript.plot.XYZPlot;
+import com.findrealhope.brian.turtlescript.shapes.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.event.ServerChatEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
@@ -23,20 +19,18 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class TurtleScriptMod {
-
-    static final boolean useQueueingTurtle = true;
+public class TurtleChatMod {
 
     final Map<String, Script> scripts = new LinkedHashMap<>();
     final Executor scriptRunner = Executors.newSingleThreadExecutor(r -> {
         Thread t = new Thread(r);
-        t.setName("TurtleScriptMod.ScriptRunner");
+        t.setName("TurtleChatMod.ScriptRunner");
         t.setDaemon(true);
         return t;
     });
-    QueueingTurtleProvider turtleProvider;
+    final TurtleFactory turtleFactory = new TurtleFactory();
 
-    public TurtleScriptMod() {
+    public TurtleChatMod() {
         scripts.put("box", new Box());
         scripts.put("cube", new Cube());
         scripts.put("circle", new Circle());
@@ -72,36 +66,7 @@ public class TurtleScriptMod {
         Script script = scripts.get(words.get(0).toLowerCase());
         if (script == null) return;
 
-        Block type;
-        if (erase) {
-            type = Blocks.air;
-        } else {
-            type = Blocks.glass;
-            ItemStack current = player.inventory.getCurrentItem();
-            if (current != null && current.getItem() != null) {
-                Block currentBlock = Block.getBlockFromItem(current.getItem());
-                // Making box of sand crashes minecraft, I guess because it's a falling type?
-                if (currentBlock != null && false == currentBlock instanceof BlockFalling) {
-                    type = currentBlock;
-                }
-            }
-        }
-
         List<String> args = words.subList(1, words.size());
-
-        Turtle turtle;
-        if (useQueueingTurtle) {
-            if (turtleProvider == null) {
-                turtleProvider = new QueueingTurtleProvider(player.worldObj);
-                FMLCommonHandler.instance().bus().register(turtleProvider);
-            }
-            turtle = turtleProvider.newTurtle(player.worldObj, type.getBlockState().getBaseState());
-        } else {
-            turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
-        }
-
-        turtle.reset(player.getPosition(), player.getHorizontalFacing());
-        turtle.forward(1);
 
         Script.Context context = new Script.Context() {
             @Override
@@ -115,13 +80,14 @@ public class TurtleScriptMod {
             }
         };
 
-        if (useQueueingTurtle) {
-            scriptRunner.execute(() -> {
-                script.draw(turtle, context);
-            });
-        } else {
-            script.draw(turtle, context);
+        Turtle turtle = turtleFactory.createTurtle(event.player);
+        if (erase) {
+            turtle.penType(Blocks.air);
         }
+
+        scriptRunner.execute(() -> {
+            script.draw(turtle, context);
+        });
     }
 
     private void showUsage(EntityPlayer player) {

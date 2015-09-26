@@ -1,4 +1,4 @@
-package com.findrealhope.turtle.shapes;
+package com.findrealhope.brian.turtlescript.shapes;
 
 import com.findrealhope.turtle.Turtle;
 import org.junit.Test;

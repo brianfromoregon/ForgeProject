@@ -1,5 +1,6 @@
 package com.findrealhope.turtle;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +19,12 @@ public class MinecraftTurtle implements Turtle {
     }
 
     public MinecraftTurtle() {
+    }
+
+    @Override
+    public Turtle penType(Block type) {
+        this.blockType = type.getBlockState().getBaseState();
+        return this;
     }
 
     @Override

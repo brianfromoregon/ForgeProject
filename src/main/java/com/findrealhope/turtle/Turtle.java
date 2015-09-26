@@ -1,5 +1,6 @@
 package com.findrealhope.turtle;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
@@ -26,4 +27,5 @@ public interface Turtle {
     // Pen
     Turtle penDown();
     Turtle penUp();
+    Turtle penType(Block type);
 }

@@ -1,5 +1,6 @@
-package com.findrealhope.turtle;
+package com.findrealhope.brian.turtlescript;
 
+import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.Vec3;
 
 import java.util.List;

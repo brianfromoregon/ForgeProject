@@ -1,5 +1,6 @@
-package com.findrealhope.turtle;
+package com.findrealhope.brian.turtlescript;
 
+import com.findrealhope.turtle.TestTurtle;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import org.junit.Before;
