@@ -24,10 +24,6 @@ public class TurtleFactory {
             }
         }
 
-        if (turtleProvider == null) {
-            turtleProvider = new QueueingTurtleProvider(player.worldObj);
-            FMLCommonHandler.instance().bus().register(turtleProvider);
-        }
         Turtle turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
         return turtle.jumpTo(player.getPosition()).face(player.getHorizontalFacing()).forward(1);
     }

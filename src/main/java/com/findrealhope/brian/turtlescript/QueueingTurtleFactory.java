@@ -51,10 +51,7 @@ public class QueueingTurtleFactory {
             }
         };
 
-        turtle.reset(player.getPosition(), player.getHorizontalFacing());
-        turtle.forward(1);
-
-        return turtle;
+        return turtle.jumpTo(player.getPosition()).face(player.getHorizontalFacing()).forward(1);
     }
 
     @SubscribeEvent
