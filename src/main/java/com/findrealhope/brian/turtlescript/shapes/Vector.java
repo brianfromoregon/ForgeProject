@@ -45,7 +45,7 @@ public class Vector implements Script {
             err_1 = dy2 - l;
             err_2 = dz2 - l;
             for (i = 0; i < l; i++) {
-                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
+                turtle.jumpTo(new BlockPos(point[0], point[1], point[2])).penDown();
                 if (err_1 > 0) {
                     point[1] += y_inc;
                     err_1 -= dx2;
@@ -62,7 +62,7 @@ public class Vector implements Script {
             err_1 = dx2 - m;
             err_2 = dz2 - m;
             for (i = 0; i < m; i++) {
-                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
+                turtle.jumpTo(new BlockPos(point[0], point[1], point[2])).penDown();
                 if (err_1 > 0) {
                     point[0] += x_inc;
                     err_1 -= dy2;
@@ -79,7 +79,7 @@ public class Vector implements Script {
             err_1 = dy2 - n;
             err_2 = dx2 - n;
             for (i = 0; i < n; i++) {
-                turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
+                turtle.jumpTo(new BlockPos(point[0], point[1], point[2])).penDown();
                 if (err_1 > 0) {
                     point[1] += y_inc;
                     err_1 -= dz2;
@@ -93,7 +93,7 @@ public class Vector implements Script {
                 point[2] += z_inc;
             }
         }
-        turtle.reset(new BlockPos(point[0], point[1], point[2]), null).penDown();
+        turtle.jumpTo(new BlockPos(point[0], point[1], point[2])).penDown();
     }
 
     @Override

@@ -2,8 +2,6 @@ package com.findrealhope.brian.turtlescript.shapes;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 public class Box implements Script {
     Rectangle rectangle = new Rectangle();
@@ -19,8 +17,7 @@ public class Box implements Script {
     }
 
     public void draw(Turtle turtle, int width, int depth, int height) {
-        BlockPos startP = turtle.position();
-        EnumFacing startF = turtle.facing();
+        Marker marker = new Marker(turtle);
 
         if (width <= 0 || depth <= 0 || height <= 0)
             return;
@@ -28,12 +25,12 @@ public class Box implements Script {
         plane.draw(turtle, width, depth);
 
         for (int level = 1; level < height - 1; level++) {
-            turtle.reset(startP, startF).up(level);
+            marker.reset().up(level);
             rectangle.draw(turtle, width, depth);
         }
 
         if (height > 1) {
-            turtle.reset(startP, startF).up(height - 1);
+            marker.reset().up(height - 1);
             plane.draw(turtle, width, depth);
         }
     }

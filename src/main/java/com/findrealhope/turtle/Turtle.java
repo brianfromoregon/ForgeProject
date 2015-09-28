@@ -9,18 +9,17 @@ import net.minecraft.util.EnumFacing;
  * https://en.wikipedia.org/wiki/Turtle_graphics
  */
 public interface Turtle {
-    // State
-    BlockPos position();
-    EnumFacing facing();
-    Turtle reset(BlockPos position, EnumFacing facing);
-
     // Motion
     Turtle forward(int blocks);
     Turtle back(int blocks);
     Turtle up(int blocks);
     Turtle down(int blocks);
+    Turtle jumpTo(BlockPos position);
+    BlockPos position();
 
     // Facing
+    EnumFacing facing();
+    Turtle face(EnumFacing facing);
     Turtle turnLeft();
     Turtle turnRight();
 
@@ -28,4 +27,5 @@ public interface Turtle {
     Turtle penDown();
     Turtle penUp();
     Turtle penType(Block type);
+    boolean isPenDown();
 }

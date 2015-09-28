@@ -2,8 +2,6 @@ package com.findrealhope.brian.turtlescript.shapes;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 public class Cylinder implements Script {
 
@@ -21,14 +19,13 @@ public class Cylinder implements Script {
         if (radius == 0 || depth == 0)
             return;
 
-        BlockPos sPos = turtle.position();
-        EnumFacing facing = turtle.facing();
+        Marker marker = new Marker(turtle);
         disc.draw(turtle, radius);
         for (int i = 0; i < depth - 2; i++) {
-            turtle.reset(sPos, facing).forward(i + 1);
+            marker.reset().forward(i + 1);
             circle.draw(turtle, radius);
         }
-        turtle.reset(sPos, facing).forward(depth - 1);
+        marker.reset().forward(depth - 1);
         disc.draw(turtle, radius);
     }
 

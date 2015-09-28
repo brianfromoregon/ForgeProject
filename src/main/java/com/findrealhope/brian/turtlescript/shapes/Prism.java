@@ -2,8 +2,6 @@ package com.findrealhope.brian.turtlescript.shapes;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 public class Prism implements Script {
 
@@ -21,14 +19,13 @@ public class Prism implements Script {
         if (height == 0 || width == 0)
             return;
 
-        BlockPos sPos = turtle.position();
-        EnumFacing sFacing = turtle.facing();
+        Marker marker = new Marker(turtle);
         triangle.drawSolid(turtle, width, height);
         for (int i = 0; i < depth - 2; i++) {
-            turtle.reset(sPos, sFacing).forward(i + 1);
+            marker.reset().forward(i + 1);
             triangle.draw(turtle, width, height);
         }
-        turtle.reset(sPos, sFacing).forward(depth - 1);
+        marker.reset().forward(depth - 1);
         triangle.drawSolid(turtle, width, height);
     }
 

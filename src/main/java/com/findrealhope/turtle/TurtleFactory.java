@@ -31,9 +31,6 @@ public class TurtleFactory {
             FMLCommonHandler.instance().bus().register(turtleProvider);
         }
         Turtle turtle = turtleProvider.newTurtle(player.worldObj, type.getBlockState().getBaseState());
-        turtle.reset(player.getPosition(), player.getHorizontalFacing());
-        turtle.forward(1);
-
-        return turtle;
+        return turtle.jumpTo(player.getPosition()).face(player.getHorizontalFacing()).forward(1);
     }
 }

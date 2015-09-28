@@ -1,6 +1,8 @@
 package com.findrealhope.brian.turtlescript;
 
 import com.findrealhope.turtle.Turtle;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 
 import java.util.List;
@@ -49,5 +51,28 @@ public interface Script {
             return context.arguments().get(idx);
         }
         return def;
+    }
+
+    class Marker {
+        final Turtle turtle;
+        final BlockPos startPos;
+        final EnumFacing startFacing;
+        final boolean penDown;
+
+        public Marker(Turtle turtle) {
+            this.turtle = turtle;
+            this.startPos = turtle.position();
+            this.startFacing = turtle.facing();
+            this.penDown = turtle.isPenDown();
+        }
+
+        public Turtle reset() {
+            if (penDown) {
+                turtle.penDown();
+            } else {
+                turtle.penUp();
+            }
+            return turtle.jumpTo(startPos).face(startFacing);
+        }
     }
 }

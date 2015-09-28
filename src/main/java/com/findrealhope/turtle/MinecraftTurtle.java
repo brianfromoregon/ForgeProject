@@ -38,12 +38,14 @@ public class MinecraftTurtle implements Turtle {
     }
 
     @Override
-    public Turtle reset(BlockPos position, EnumFacing facing) {
-        this.penDown = false;
-        if (position != null)
-            this.pos = position;
-        if (facing != null)
-            this.facing = facing;
+    public Turtle face(EnumFacing facing) {
+        this.facing = facing;
+        return this;
+    }
+
+    @Override
+    public Turtle jumpTo(BlockPos position) {
+        this.pos = mark(position);
         return this;
     }
 
@@ -102,6 +104,11 @@ public class MinecraftTurtle implements Turtle {
     public Turtle penUp() {
         penDown = false;
         return this;
+    }
+
+    @Override
+    public boolean isPenDown() {
+        return penDown;
     }
 
     private BlockPos mark(BlockPos pos) {

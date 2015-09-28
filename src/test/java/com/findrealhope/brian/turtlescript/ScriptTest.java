@@ -16,7 +16,7 @@ public abstract class ScriptTest {
 
     @Before
     public void setup() {
-        turtle.reset(xyz(4, 0, 0), EnumFacing.NORTH);
+        turtle.jumpTo(xyz(4, 0, 0)).face(EnumFacing.NORTH);
     }
 
     public BlockPos xyz(int x, int y, int z) {

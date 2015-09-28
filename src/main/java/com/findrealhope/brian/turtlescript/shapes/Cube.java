@@ -2,7 +2,6 @@ package com.findrealhope.brian.turtlescript.shapes;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
 
 import static java.lang.Math.min;
 
@@ -19,9 +18,9 @@ public class Cube implements Script {
     }
 
     public void draw(Turtle turtle, int width, int depth, int height) {
-        BlockPos start = turtle.position();
+        Marker marker = new Marker(turtle);
         for (int i = 0; i < min(min(width, depth), height); i++) {
-            turtle.reset(start, null).up(i).forward(i);
+            marker.reset().up(i).forward(i);
             box.draw(turtle, width - i, depth - i, height - i);
         }
     }
