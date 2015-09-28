@@ -28,7 +28,7 @@ public class TurtleChatMod {
         t.setDaemon(true);
         return t;
     });
-    final TurtleFactory turtleFactory = new TurtleFactory();
+    final QueueingTurtleFactory turtleFactory = new QueueingTurtleFactory();
 
     public TurtleChatMod() {
         scripts.put("box", new Box());

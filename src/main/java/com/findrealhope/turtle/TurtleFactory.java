@@ -9,8 +9,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TurtleFactory {
 
-    QueueingTurtleProvider turtleProvider;
-
     /**
      * Create a turtle sitting in front of the player's feet
      */
@@ -26,11 +24,7 @@ public class TurtleFactory {
             }
         }
 
-        if (turtleProvider == null) {
-            turtleProvider = new QueueingTurtleProvider(player.worldObj);
-            FMLCommonHandler.instance().bus().register(turtleProvider);
-        }
-        Turtle turtle = turtleProvider.newTurtle(player.worldObj, type.getBlockState().getBaseState());
+        Turtle turtle = new MinecraftTurtle(player.worldObj, type.getBlockState().getBaseState());
         turtle.reset(player.getPosition(), player.getHorizontalFacing());
         turtle.forward(1);
 
