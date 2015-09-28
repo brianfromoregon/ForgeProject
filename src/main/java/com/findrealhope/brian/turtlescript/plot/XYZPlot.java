@@ -2,8 +2,6 @@ package com.findrealhope.brian.turtlescript.plot;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -24,8 +22,7 @@ public class XYZPlot implements Script {
 
     public void draw(Turtle turtle, String equation, int x1, int x2, int y1, int y2) {
         try {
-            BlockPos sPos = turtle.position();
-            EnumFacing sFacing = turtle.facing();
+            Marker marker = new Marker(turtle);
             for (int x = x1; x <= x2; x++) {
                 for (int y = y1; y <= y2; y++) {
                     engine.put("x", x);
@@ -34,7 +31,7 @@ public class XYZPlot implements Script {
                     if (o instanceof Number) {
                         double d = ((Number) o).doubleValue();
                         int z = (int) Math.round(d);
-                        turtle.reset(sPos, sFacing).forward(x - x1).up(z).turnRight().forward(y - y1).penDown();
+                        marker.reset().forward(x - x1).up(z).turnRight().forward(y - y1).penDown();
                     }
                 }
             }

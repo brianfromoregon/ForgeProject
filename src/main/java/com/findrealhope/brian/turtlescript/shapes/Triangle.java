@@ -3,7 +3,6 @@ package com.findrealhope.brian.turtlescript.shapes;
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 public class Triangle implements Script {
 
@@ -17,11 +16,9 @@ public class Triangle implements Script {
     }
 
     public void drawSolid(Turtle turtle, int width, int height) {
-        BlockPos sPos = turtle.position();
-        EnumFacing sFacing = turtle.facing();
+        Marker marker = new Marker(turtle);
         for (int i = 0; i < height; i++) {
-            turtle.reset(sPos, sFacing);
-            draw(turtle, width, height - i);
+            draw(marker.reset(), width, height - i);
         }
     }
 

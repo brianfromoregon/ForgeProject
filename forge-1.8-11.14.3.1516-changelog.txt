@@ -1,5 +1,297 @@
 Changelog:
-Build 1450:
+Build 1516:
+	luacs1998: Fix a possible crash in EventBus
+
+Build 1.8-11.14.3.1515:
+	rubensworks: Fix dispenser action for modded spawn eggs
+
+Build 1.8-11.14.3.1514:
+	LexManos: Update Gradle wrapper to 2.7
+	LexManos: Fix entity count being incorrect for spawning logic. Now filter out 'persistant' entities.
+
+Build 1.8-11.14.3.1513:
+	foka_12: Disallow conflicting furnace recipes
+
+Build 1.8-11.14.3.1512:
+	fry: Workaround for MinecraftForge/ForgeGradle#256
+
+Build 1.8-11.14.3.1511:
+	cpw:
+		FMLNetworkHandler.openGui should not try and open a GUI on a FakePlayer.
+		Fixes #2082 and probably dozens of mod errors. Also, side benefit of the
+		merged codebase! FML code can ref Forge code!
+
+Build 1.8-11.14.3.1510:
+	laci200270: Update FMLSecurityManager.java
+	cpw: Format a bit better
+
+Build 1.8-11.14.3.1509:
+	fry: Much requested temporary hack for items and TESRs. Context: #1582, #1597, #1713, #2058 and others.
+
+Build 1.8-11.14.3.1508:
+	vorquel: Fix faulty Channel name
+
+Build 1.8-11.14.3.1507:
+	simonbarnes1: Use already provided profile for the player's own skin
+
+Build 1.8-11.14.3.1506:
+	cpw:
+		More cleanup of the default eclipse workspace. The project is now called "MDKExample" not "Minecraft".
+		The project tree is now contemporary, instead of a copy from 1.5.x era MC. The launches are cleaned up, and refer to
+		a better default "runDir" of "run" rather than "eclipse".. Updating to FG2.0.1 which will contain relevant binary fixes.
+
+Build 1.8-11.14.3.1505:
+	cpw: Fix eclipse workspace inside the mdk - don't run it through the tokenconverter. Also add in CREDITS-fml.txt to the MDK - it's still required.
+
+Build 1.8-11.14.3.1504:
+	LexManos:
+		Fixed issue where config folder would not be created before SplashProgress tried to read from it.
+		Default macs to disable the new loading screen due to to many macs having issues.
+		Users can enable it again by editing their config.
+		Catch and gracefully handle more errors when starting up the Splash Screen.
+
+Build 1.8-11.14.3.1503:
+	diesieben07: Re-introduce RenderBlockOverlayEvent, seems to have been missed during 1.8 update
+	Abrar Syed: removed broken and duplicate AT lines
+	Abrar Syed: added hardcoded fml version file
+	Abrar Syed: DeobfuscationData no longer required at dev time
+	Abrar Syed: removed old unnecessary stuff
+	Abrar Syed: Added FG2 buildscript + updated for Gradle 2.4
+	Abrar Syed: added jenkins compat tasks
+	Abrar Syed: fixed local-building fail with changelog
+	Abrar Syed: updated installed gradle. not finished
+	Abrar Syed: fixed deployment credentials
+	cpw: FML is no more. FML has ceased to be. FML's expired and gone to meet its maker. FML's a stiff! Bereft of life, FML rests in peace.
+	cpw: Vestigal fml-ectomy.
+	cpw:
+		FML's metabolic processes are now history. FML's off the twig. FML's kicked the bucket, FML's shuffled off this mortal coil,
+		run down the curtain and joined the bleedin' choir invisible!! THIS IS AN EX-PROJECT!
+	Abrar Syed: added MDK package
+	cpw: Fix MDK task - it now runs.
+	cpw: The final nail in the coffin. BYE!
+	cpw:
+		Trying to fix the MDK to include gradle wrapper, but the gradle-wrapper.jar is
+		corrupted. @AbrarSyed can you take a look?
+	cpw:
+		Fix packaging the gradle wrapper properly. There is still a problem with
+		the MDK- it fails to run setupDecompWorkspace.
+		
+		Filed an issue at ForgeGradle, since this seems to be something FG2 shouldn't
+		be doing, but is?
+		
+		https://github.com/MinecraftForge/ForgeGradle/issues/235
+	cpw: Remove patches
+	cpw: Fix ciWriteBuildNumber task. Ugly, but it works.
+	cpw: Fix crowdin task. Good luck jenkins, lets roll!
+	cpw: Fix crowdin again. Run, jenkins, for god's sake, run!
+	LexManos: Update gradle wrapper and fix changelog task.
+
+Build 1.8-11.14.3.1502:
+	cpw: ObjectHolder works great, but it should be a lot less spammy about failed lookups. They're usually mod options.
+	cpw: Actually rebuild the fluidNames each rebuild, don't just try and force changes in. Should fix #1973
+	cpw:
+		Wake up the FluidRegistry before any mods start loading. Should stop mods claiming to own water or lava (depending on who accessed
+		FluidRegistry first)
+	cpw: Be a little bit more helpful when the ObjectHolder misses. Should help figure out what is going in in #2006
+	cpw: Cherry pick some changes from 1.8 for inner class discovery, also fix the negativecache. Closes #1872
+
+Build 1.8-11.14.3.1501:
+	LexManos: Fix placing skulls on fence posts. Closes #2055
+
+Build 1.8-11.14.3.1500:
+	starbuck: Fix harvest logic running in addition to shearable logic
+
+Build 1.8-11.14.3.1499:
+	glstillman: Fixed a bug with ExtendedBlockStates containing at least one IProperty and one IUnlistedProperty not allowing blocks to be placed.
+
+Build 1.8-11.14.3.1498:
+	liach: Add an EnumHelper hook and fixed an issue
+
+Build 1.8-11.14.3.1497:
+	simonbarnes1: Fix placing signs with NBT prompting for text
+
+Build 1.8-11.14.3.1496:
+	Zaggy1024:
+		Fixed a Forge blockstates json removing models causing an NPE in the loader.
+		Fixed the deep clone of a V1 Variant not cloning the submodels properly.
+
+Build 1.8-11.14.3.1495:
+	clienthax: Signed-off-by: Clienthax <clienthax@gmail.com>
+
+Build 1.8-11.14.3.1494:
+	rubensworks: Make EnumFacing events available server-side
+
+Build 1.8-11.14.3.1493:
+	rubensworks: Fix source block check for BlockFluidClassic
+
+Build 1.7.10-10.13.4.1492-1.7.10:
+	cpw: Cherry pick some changes from 1.8 for inner class discovery, also fix the negativecache. Closes #1872
+
+Build 1.8-11.14.3.1491:
+	diesieben07: Allow the new entity eggs to be created via middle-click
+
+Build 1.7.10-10.13.4.1490-1.7.10:
+	cpw: Actually rebuild the fluidNames each rebuild, don't just try and force changes in. Should fix #1973
+	cpw:
+		Wake up the FluidRegistry before any mods start loading. Should stop mods claiming to own water or lava (depending on who accessed
+		FluidRegistry first)
+	cpw: Be a little bit more helpful when the ObjectHolder misses. Should help figure out what is going in in #2006
+
+Build 1.8-11.14.3.1487:
+	fry: Custom transformations in forge blockstate json.
+
+Build 1.8-11.14.3.1486:
+	LexManos: Fixed ItemMonsterPlacer.getEggInfo missing return. Closes #1975
+
+Build 1.8-11.14.3.1485:
+	jadran.kotnik: Fixed error GUIs showing a white screen and replaced a rogue direct GL call.
+
+Build 1.8-11.14.3.1484:
+	izooDee5: Fix particle texture of the generated item models.
+
+Build 1.8-11.14.3.1483:
+	bernhard.bonigl: Fix StateMap always mapping properties to the "minecraft" domain instead of the mods, causing it to not find BlockState definitions.
+
+Build 1.8-11.14.3.1482:
+	LexManos: Add debug for max texture size and output when Texture Atlas can not stitch all textures.
+
+Build 1.7.10-10.13.4.1481-1.7.10:
+	cpw: ObjectHolder works great, but it should be a lot less spammy about failed lookups. They're usually mod options.
+
+Build 1.8-11.14.3.1480:
+	LexManos: More descripotive error if Patcher is passed invalid data for vanilla classes.
+
+Build 1.8-11.14.3.1479:
+	fry: Fixed perspective transformations for item models.
+	fry: Vanilla models can now use custom textures. Fixes #1962
+	fry: There's no Map.getOrDefault in java6.
+
+Build 1.8-11.14.3.1476:
+	LexManos: Fix AT for Block constructor.
+
+Build 1.8-11.14.3.1475:
+	fry: Added ItemLayerModel - less awkward, simpler and faster version of ItemModelGenerator.
+
+Build 1.8-11.14.3.1474:
+	LexManos: Throw more descriptive errors when mods attempt to register invalid global entity IDs.
+	LexManos: Include the thread state in the potential error handleing for SplashProgress.
+	LexManos: Fixed Wavefront Object Importer reading files with integer values. Closes #1651, #1654
+	LexManos: Create config folder in SplashProgress if it does not exist.
+	LexManos: Add the stitching allocation stage to loading screen.
+	LexManos:
+		Make TextureMap for items and blocks skip the first pass of loading/stitching textures.
+		Should decrease loading times for large packs.
+		May cause issues with some mods so use -Dfml.skipFirstTextureLoad=false to disable.
+	LexManos: Add TextureManager to loading screen.
+	LexManos: Time each bar in the loading screen and print it to the log, useful information to see where most time is spent in loading.
+	cpw:
+		Mods that are extracted to the mods dir by unzipping or whatever will now cause the game to crash. Too much info is in the META-INF now,
+		and more will be being added. Extracting to the mods dir just completely breaks that.
+
+Build 1.8-11.14.3.1473:
+	jamioflan:
+		Added CameraSetup sub-event for camera angles
+		
+		Allows players to alter yaw and pitch of renderViewEntity, but more importantly, adds the ability to roll the view.
+		
+		Added camera roll hook
+
+Build 1.7.10-10.13.4.1472-1.7.10:
+	michafla: fix logic for guessing mesa tag in biome dict
+	cpw:
+		Mods that are extracted to the mods dir by unzipping or whatever will now cause the game to crash. Too much info is in the META-INF now,
+		and more will be being added. Extracting to the mods dir just completely breaks that.
+
+Build 1.7.10-10.13.4.1470-1.7.10:
+	LexManos: Add TextureManager to loading screen.
+	LexManos: Time each bar in the loading screen and print it to the log, useful information to see where most time is spent in loading.
+
+Build 1.7.10-10.13.4.1469-1.7.10:
+	LexManos: Create config folder in SplashProgress if it does not exist.
+	LexManos: Add the stitching allocation stage to loading screen.
+	LexManos:
+		Make TextureMap for items and blocks skip the first pass of loading/stitching textures.
+		Should decrease loading times for large packs.
+		May cause issues with some mods so use -Dfml.skipFirstTextureLoad=false to disable.
+
+Build 1.8-11.14.3.1468:
+	LexManos: Patch line number update. Ignore this.
+	LexManos:
+		New system in EntityRegistry to allow modders to register spawn eggs.
+		For entites that do not use the global ID system.
+		{Which no mod entity should}
+		Vanilla spawn eggs will now detect a 'entity_name' entry in it's NBT data and use that for spawning/rendering.
+
+Build 1.8-11.14.3.1467:
+	foka_12: Change permission levels on ore recipes parameters
+
+Build 1.8-11.14.3.1466:
+	foka_12:
+		Fixed NPE when calling canBrew
+		
+		Oversight on my part,
+		
+		If the ingredient doesn't return true in Item.isPotionIngredient, Items.potionitem.getEffects(stack) returns null, causing an NPE to be thrown later on.
+		
+		This invalidates #1947.
+
+Build 1.8-11.14.3.1465:
+	LexManos: Use Guava instead of Nio for J6 compatibility.
+
+Build 1.8-11.14.3.1464:
+	fry: Added fluid renderer.
+
+Build 1.8-11.14.3.1463:
+	LexManos: Make Item.shouldCauseReequipAnimation is bit more precise and copy over the new item for rendering even if the animation is diabled.
+
+Build 1.8-11.14.3.1462:
+	LexManos: Add vanilla block rotation support back in for certain blocks that were missed in 1.8 update. Closes #1903
+
+Build 1.8-11.14.3.1461:
+	xxmicloxx: Bugfix for B3DLoader
+
+Build 1.8-11.14.3.1460:
+	dan:
+		Fix incorrect block position in BlockReed canPlaceBlockAt
+		
+		block.canSustainPlant is called on the wrong block position.  It should be called on the block below (the 'soil' block).
+
+Build 1.8-11.14.3.1459:
+	tehgeek: Add GuiScreenEvents for keyboard and mouse input
+
+Build 1.8-11.14.3.1458:
+	t.tomkins:
+		Player sensitive version of Block.getPickBlock
+		
+		Block.getPickBlock was patched in 1.7 but was overlooked in 1.8.
+		
+		Closes: https://github.com/MinecraftForge/MinecraftForge/issues/1709
+	LexManos: Add Item.shouldCauseReequipAnimation to allow modders more control over the 'Reequip' animation.
+
+Build 1.8-11.14.3.1457:
+	LexManos: Fixed compile issues with irtimaled's PR.
+
+Build 1.7.10-10.13.4.1456-1.7.10:
+	irtimaled:
+		Copy fortress.dat from vanilla location
+		
+		Fixes #1747
+		
+		If the dat file isn't in the dimension specific folder but is present in the vanilla data folder then copy it over.
+	LexManos: Make FML Gui classes use GlStateManager. Closes FML#615
+	LexManos: Fixed Wavefront Object Importer reading files with integer values. Closes #1651, #1654
+
+Build 1.8-11.14.3.1453:
+	LexManos: Cleanup code format in LayerBreakingTest.
+	LexManos: Fixup model loading errors not being printed by making ICustomModelLoader.loadModel propogate IOExceptions as needed.
+
+Build 1.7.10-10.13.4.1452-1.7.10:
+	LexManos: Include the thread state in the potential error handleing for SplashProgress.
+
+Build 1.7.10-10.13.4.1451-1.7.10:
+	LexManos: Throw more descriptive errors when mods attempt to register invalid global entity IDs.
+
+Build 1.8-11.14.3.1450:
 	LexManos: Bump version for new RB.
 	LexManos: Cleanup some spammy output.
 	LexManos: Quiet ClassPatchManager debug spam by default. Reenable using -Dfml.debugClassPatchManager=true.

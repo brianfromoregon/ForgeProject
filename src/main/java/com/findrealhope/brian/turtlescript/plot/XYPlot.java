@@ -2,7 +2,6 @@ package com.findrealhope.brian.turtlescript.plot;
 
 import com.findrealhope.brian.turtlescript.Script;
 import com.findrealhope.turtle.Turtle;
-import net.minecraft.util.BlockPos;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -21,14 +20,14 @@ public class XYPlot implements Script {
 
     public void draw(Turtle turtle, String equation, int x1, int x2) {
         try {
-            BlockPos start = turtle.position();
+            Marker marker = new Marker(turtle);
             for (int x = x1; x <= x2; x++) {
                 engine.put("x", x);
                 Object o = engine.eval("with (Math) {" + equation + "}");
                 if (o instanceof Number) {
                     double d = ((Number) o).doubleValue();
                     int y = (int) Math.round(d);
-                    turtle.reset(start, null).forward(x - x1).up(y).penDown();
+                    marker.reset().forward(x - x1).up(y).penDown();
                 } else {
                     return;
                 }
