@@ -9,4 +9,4 @@
 #### Verify
 1. Run Minecraft client from within IDE
 2. Create a new world in Creative mode
-3. Type the word 'draw' in chat and see if a line of glass blocks is created in front of you
+3. Type the word *draw* in chat and see if a line of glass blocks is created in front of you
