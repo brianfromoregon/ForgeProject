@@ -1,6 +1,6 @@
 package com.findrealhope;
 
-import com.findrealhope.turtle.ExampleTurtleMod;
+import com.findrealhope.examples.ExampleTurtleMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

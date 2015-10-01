@@ -1,5 +1,7 @@
-package com.findrealhope.turtle;
+package com.findrealhope.examples;
 
+import com.findrealhope.turtle.Turtle;
+import com.findrealhope.turtle.TurtleFactory;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -14,7 +16,9 @@ public class ExampleTurtleMod {
     public void chatEvent(ServerChatEvent event) {
         if (event.message.equalsIgnoreCase("draw")) {
             Turtle turtle = turtleFactory.createTurtle(event.player);
-            turtle.penDown().forward(10);
+
+            turtle.penDown();
+            turtle.forward(10);
         }
     }
 
