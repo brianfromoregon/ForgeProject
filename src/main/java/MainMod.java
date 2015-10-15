@@ -1,6 +1,5 @@
-package com.findrealhope;
-
 import com.findrealhope.examples.ExampleTurtleMod;
+import com.findrealhope.examples.TurtleTips;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -14,5 +13,6 @@ public class MainMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new ExampleTurtleMod());
+        MinecraftForge.EVENT_BUS.register(new TurtleTips());
     }
 }

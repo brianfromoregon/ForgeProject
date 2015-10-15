@@ -1,4 +1,4 @@
-// TODO use 2.0.2 when released
+// TODO use 2.0.2 when released (check at http://files.minecraftforge.net/maven/net/minecraftforge/gradle/ForgeGradle)
 // For those who want the bleeding edge
 buildscript {
     repositories {
