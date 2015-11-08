@@ -1,6 +1,7 @@
 package com.findrealhope.turtle;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
@@ -26,6 +27,9 @@ public interface Turtle {
     BlockPos position();
     EnumFacing facing();
     Turtle face(EnumFacing facing);
-    Turtle penType(Block type);
+    Turtle penType(IBlockState type);
     boolean isPenDown();
+    default Turtle penType(Block type) {
+        return penType(type.getBlockState().getBaseState());
+    }
 }

@@ -22,8 +22,8 @@ public class MinecraftTurtle implements Turtle {
     }
 
     @Override
-    public Turtle penType(Block type) {
-        this.blockType = type.getBlockState().getBaseState();
+    public Turtle penType(IBlockState type) {
+        this.blockType = type;
         return this;
     }
 
