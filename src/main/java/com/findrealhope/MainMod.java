@@ -1,3 +1,5 @@
+package com.findrealhope;
+
 import com.findrealhope.examples.ExampleTurtleMod;
 import com.findrealhope.examples.TurtleTips;
 import net.minecraftforge.common.MinecraftForge;
