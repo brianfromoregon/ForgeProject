@@ -86,3 +86,5 @@ processResources
 apply plugin: 'java'
 sourceCompatibility = 8
 targetCompatibility = 8
+
+idea { module { inheritOutputDirs = true } }
