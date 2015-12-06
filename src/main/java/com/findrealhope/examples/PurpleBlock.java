@@ -1,21 +1,24 @@
 package com.findrealhope.examples;
 
 import com.findrealhope.MainMod;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class PurpleSword extends Item {
-    public static final String name = "purple_sword";
-    public static final PurpleSword instance = new PurpleSword();
+public class PurpleBlock extends Block {
+    public static final String name = "purple_block";
+    public static final PurpleBlock instance = new PurpleBlock(Material.ground);
 
-    private PurpleSword() {
+    private PurpleBlock(Material material) {
+        super(material);
         setUnlocalizedName(name);
         setCreativeTab(CreativeTabs.tabMisc);
     }
 
     // Call during FMLPreInitializationEvent
     public static void register() {
-        GameRegistry.registerItem(instance, name);
+        GameRegistry.registerBlock(instance, name);
     }
 }
