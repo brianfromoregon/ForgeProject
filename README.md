@@ -13,9 +13,9 @@
 1. These steps are only required if you are using IntelliJ.
   * Open IntelliJ, choose Import Project, and select the build.gradle file inside the ForgeProject directory. Press OK twice.
   * After import finishes open Run > Edit Configurations, click the green plus button, select Application, and set these values:
-    * Name -> Minecraft
-    * Main class -> GradleStart
-    * Use classpath of module -> ForgeProject_main
+    * Name: Minecraft
+    * Main class: GradleStart
+    * Use classpath of module: ForgeProject_main
 1. Press OK and click the green play button.
 
 #### Verify
