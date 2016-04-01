@@ -6,4 +6,4 @@ public class ChatItems {
 
 
 // Copy the mod from here:
-// https://github.com/devoxx4kids/materials/tree/master/workshops/minecraft#Chat_Items
+// https://github.com/devoxx4kids/materials/blob/8d92ee4e8e9aa32cac66cd967f55c6c367849405/workshops/minecraft/readme-forge.asciidoc#Chat_Items

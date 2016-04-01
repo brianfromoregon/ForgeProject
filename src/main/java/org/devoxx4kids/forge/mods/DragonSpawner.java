@@ -6,4 +6,4 @@ public class DragonSpawner {
 
 
 // Copy the mod from here:
-// https://github.com/devoxx4kids/materials/tree/master/workshops/minecraft#Dragon_Spawner
+// https://github.com/devoxx4kids/materials/blob/8d92ee4e8e9aa32cac66cd967f55c6c367849405/workshops/minecraft/readme-forge.asciidoc#Dragon_Spawner
